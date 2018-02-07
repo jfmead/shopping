@@ -26,12 +26,16 @@ end
 def add_item
   puts "What would you like to add to the cart?"
   all_items 
-  item_num = gets.to_i - 1
-  item_added = @shopping_items.delete_at(item_num)
-  @shopping_cart << item_added  
-  print item_added[:item].green
-  puts " have been added".green
-  wallet
+  if @shopping_cart[item_num] == nil
+    puts "That's not an option"
+  else 
+    item_num = gets.to_i - 1
+    item_added = @shopping_items.delete_at(item_num)
+    @shopping_cart << item_added  
+    print item_added[:item].green
+    puts " have been added".green
+    wallet
+  end 
   menu
 end 
 
@@ -62,11 +66,15 @@ end
 def remove_item
   puts "What would you like to remove from your cart?"
   cart 
-  item_num = gets.strip.to_i - 1
-  item_removed = @shopping_cart.delete_at(item_num)
-  @shopping_items << item_removed 
-  print item_removed[:item].green
-  puts " has been removed".green
+  item_num = gets.strip.to_i - 1 
+  if @shopping_cart[item_num] == nil
+    puts "That's not an option"
+  else 
+    item_removed = @shopping_cart.delete_at(item_num)
+    @shopping_items << item_removed 
+    print item_removed[:item].green
+    puts " has been removed".green
+  end 
   menu
 end 
 
