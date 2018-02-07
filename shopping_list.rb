@@ -29,6 +29,9 @@ def add_item
   item_num = gets.to_i - 1
   item_added = @shopping_items.delete_at(item_num)
   @shopping_cart << item_added  
+  print item_added[:item].green
+  puts " have been added".green
+  wallet
   menu
 end 
 
@@ -57,12 +60,13 @@ def cart
 end 
 
 def remove_item
-  binding.pry
-    puts "What would you like to remove from your cart?"
-    cart 
-    item_num = gets.strip.to_i - 1
-    item_removed = @shopping_cart.delete_at(item_num)
-    @shopping_items << item_removed 
+  puts "What would you like to remove from your cart?"
+  cart 
+  item_num = gets.strip.to_i - 1
+  item_removed = @shopping_cart.delete_at(item_num)
+  @shopping_items << item_removed 
+  print item_removed[:item].green
+  puts " has been removed".green
   menu
 end 
 
@@ -71,7 +75,7 @@ def wallet
   @shopping_cart.each do | item | 
     total << item[:price] 
   end
-  cost = total.sum 
+  cost = total.sum.round(2)
   puts "You have spent: $#{cost}"
   menu
 end
